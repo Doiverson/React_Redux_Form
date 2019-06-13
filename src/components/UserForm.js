@@ -4,31 +4,36 @@ import { Control, Form } from 'react-redux-form'
 
 import { addUser } from "../actions";
 
+import ShowUsers from './ShowUsers'
+
 class UserForm extends Component {
 
     componentDidMount() {
     }
 
-    handleSubmit = (user) => {
+    handleSubmit = (user, e) => {
+        e.preventDefault()
         this.props.addUser(user.firstName, user.lastName);
-        console.log(this.props)
     }
 
     render() {
         return (
-            <Form
-                model="user"
-                onSubmit={(user) => this.handleSubmit(user)} >
-                <label htmlFor="user.firstName">First name:</label>
-                <Control.text model="user.firstName" id="user.firstName" />
+            <div>
+                <Form
+                    model="user"
+                    onSubmit={(user, e) => this.handleSubmit(user, e)} >
+                    <label htmlFor="user.firstName">First name:</label>
+                    <Control.text model="user.firstName" id="user.firstName" />
 
-                <label htmlFor="user.lastName">Last name:</label>
-                <Control.text model="user.lastName" id="user.lastName" />
+                    <label htmlFor="user.lastName">Last name:</label>
+                    <Control.text model="user.lastName" id="user.lastName" />
 
-                <button type="submit">
-                    Finish registration!
-                </button>
-            </Form>
+                    <button type="submit">
+                        Finish registration!
+                    </button>
+                </Form>
+                <ShowUsers/>
+            </div>
         )
     }
 }
